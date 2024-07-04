@@ -20,6 +20,8 @@ class HooksController extends Controller
         if(!hash_equals($localHash, $requestHash)){
             return response()->json(['error' => 'invalid-signature'], 200);
         }
+
+        echo "state 0";
         
         $json = json_decode($payload);
         if(!isset($json->ref)){
@@ -32,7 +34,7 @@ class HooksController extends Controller
         $folderApp = $this->getBasePath(env('APP_FOLDER'));
         $repoLocation = $folderApp . '/' . $repoName;
         $scriptPath = $repoLocation . '/deploy.sh';
-        
+        echo "state 1";
         $output = shell_exec("bash $scriptPath 2>&1");
         
         log::info("lokasi repo: $repoLocation");
