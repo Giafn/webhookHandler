@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/hooks/deploy', [HooksController::class, 'handleGithubWebhookForDeploy']);
+Route::post('/hooks/deploy/{repoName}', [HooksController::class, 'handleGithubWebhookForDeploy']);
