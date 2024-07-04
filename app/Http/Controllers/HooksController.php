@@ -37,7 +37,13 @@ class HooksController extends Controller
             $scriptPath = $repoLocation . '/deploy.sh';
             $output = shell_exec("bash $scriptPath 2>&1");
 
-            $this->log($repoName, $output);
+            // commit message
+            $commitMessage = $json->commits[0]->message ?? 'No commit message';
+
+            $this->log(
+                $repoName, 
+                'Deployed: ' . $commitMessage . ' | ' . $output
+            );
             
 
         } catch (\Exception $e) {
