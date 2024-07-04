@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $dataLog = LogDeploy::orderBy('id', 'desc')->paginate(10);
+        $dataLog = LogDeploy::orderBy('id', 'desc')->paginate(5);
         return view('home', compact('dataLog'));
     }
 
