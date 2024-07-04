@@ -10,6 +10,7 @@ class HooksController extends Controller
 {
     public function handleGithubWebhookForDeploy(Request $request, $repoName)
     {
+        Log::info('webhook received');
         $requestHash = $request->header('x-hub-signature-256') ?? '';
         $payload = $request->getContent();
 
@@ -29,13 +30,13 @@ class HooksController extends Controller
         }
         $folderApp = $this->getBasePath(env('APP_FOLDER'));
         $repoLocation = $folderApp . '/' . $repoName;
-        log::info("lokasi repo: $repoLocation");
         $scriptPath = $repoLocation . '/deploy.sh';
-        log::info("lokasi script: $scriptPath");
- 
+        
         $output = shell_exec("bash $scriptPath 2>&1");
- 
-        Log::info($output);
+        
+        log::info("lokasi repo: $repoLocation");
+        log::info("lokasi script: $scriptPath");
+        Log::info("result webhook: $output");
 
         return response()->json(['success' => 'success'], 200);
     }
