@@ -41,7 +41,7 @@ class HooksController extends Controller
             
 
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
+            $this->log($repoName, $e->getMessage());
             echo $e->getMessage();
             return response()->json(['error' => $e->getMessage()], 200);
         }
