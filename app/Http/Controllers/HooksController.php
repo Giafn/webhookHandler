@@ -11,7 +11,7 @@ class HooksController extends Controller
     public function handleGithubWebhookForDeploy(Request $request, $repoName)
     {
         try {
-            Log::info('webhook received');
+            // Log::info('webhook received');
             $requestHash = $request->header('x-hub-signature-256') ?? '';
             $payload = $request->getContent();
 
@@ -34,9 +34,9 @@ class HooksController extends Controller
             $scriptPath = $repoLocation . '/deploy.sh';
             $output = shell_exec("bash $scriptPath 2>&1");
             
-            log::info("lokasi repo: $repoLocation");
-            log::info("lokasi script: $scriptPath");
-            Log::info("result webhook: $output");
+            // log::info("lokasi repo: $repoLocation");
+            // log::info("lokasi script: $scriptPath");
+            // Log::info("result webhook: $output");
 
         } catch (\Exception $e) {
             Log::error($e->getMessage());
