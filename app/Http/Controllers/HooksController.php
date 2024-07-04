@@ -10,6 +10,7 @@ class HooksController extends Controller
 {
     public function handleGithubWebhookForDeploy(Request $request, $repoName)
     {
+        echo "webhook received";
         Log::info('webhook received');
         $requestHash = $request->header('x-hub-signature-256') ?? '';
         $payload = $request->getContent();
