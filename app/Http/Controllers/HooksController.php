@@ -35,6 +35,12 @@ class HooksController extends Controller
             $folderApp = $this->getBasePath(env('APP_FOLDER'));
             $repoLocation = $folderApp . '/' . $repoName;
             $scriptPath = $repoLocation . '/deploy.sh';
+
+            if (!file_exists($scriptPath)) {
+                $this->log($repoName, 'deploy.sh not found');
+                return response()->json(['error' => 'deploy.sh not found'], 200);
+            }
+
             $output = shell_exec("bash $scriptPath 2>&1");
 
             // commit message
