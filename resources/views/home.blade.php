@@ -9,15 +9,27 @@
     <title>Login</title>
     @endif
     <script src="https://cdn.tailwindcss.com"></script>
-    {{-- alpine js --}}
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2"></script>
 </head>
 <body>
     @if (request()->session()->get('login'))
+    <nav class="bg-gray-800 dark:bg-gray-800">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div>
+                    <a class="text-white dark:text-white" href="/">
+                        <h1 class="text-xl font-bold">Logs<span class="text-blue-500">Deploy</span></h1>
+                    </a>
+                </div>
+                <div class="flex items-center -mx-2">
+                    <a href="/logout" class="text-white dark:text-white">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="container mx-auto p-4">
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-bold">Log</h1>
-            <select name="perpage" id="perpage" class="border border-gray-300 rounded-lg p-2" onchange="location.href='/?perpage=' + this.value">
+            <select name="perpage" id="perpage" class="border border-gray-300 rounded-lg py-2 px-4" onchange="location.href='/?perpage=' + this.value">
                 <option value="10" {{ request()->get('perpage') == 10 || !request()->get('perpage') ? 'selected' : '' }} selected>10</option>
                 <option value="15" {{ request()->get('perpage') == 15 ? 'selected' : '' }}>15</option>
                 <option value="20" {{ request()->get('perpage') == 20 ? 'selected' : '' }}>20</option>

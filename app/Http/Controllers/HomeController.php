@@ -27,10 +27,16 @@ class HomeController extends Controller
             'password' => 'required|string|max:255',
         ]);
 
-        if ($request->username == 'admin' && $request->password == '123456') {
+        if ($request->username == env('USER_ACCOUNT') && $request->password == env('PASSWORD_ACCOUNT')) {
             $request->session()->put('login', true);
-        } 
+        }
         
+        return redirect('/');
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('login');
         return redirect('/');
     }
 }
