@@ -9,9 +9,13 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        $validator = $request->validate([
+            'perpage' => 'nullable|integer',
+        ]);
+        $perpage = $request->perpage ?? 10;
         $dataLog = [];
         if  ($request->session()->get('login')) {
-            $dataLog = LogDeploy::orderBy('id', 'desc')->paginate(5);
+            $dataLog = LogDeploy::orderBy('id', 'desc')->paginate($perpage);
         }
         return view('home', compact('dataLog'));
     }
