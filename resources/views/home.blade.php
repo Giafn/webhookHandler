@@ -36,10 +36,7 @@
                 @endforelse
             </tbody>
         </table>
-        {{-- pagination --}}
-        <div class="flex justify-end mt-4">
-            {{ $dataLog->links() }}
-        </div>
+        {{ $dataLog->links() }}
     </div>
     @else
     <section class="bg-gray-50 dark:bg-gray-900">
