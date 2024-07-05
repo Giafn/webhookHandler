@@ -36,7 +36,9 @@
                 @endforelse
             </tbody>
         </table>
-        {{ $dataLog->links() }}
+        <div class="mt-2">
+            {{ $dataLog->links() }}
+        </div>
     </div>
     @else
     <section class="bg-gray-50 dark:bg-gray-900">
